@@ -1,6 +1,7 @@
 /*
  * Bahia Experiences: renders the content, switches language and theme,
- * and runs the section tabs. Content lives in content.js, labels in i18n.js.
+ * runs the section tabs, the category filters and the experience window.
+ * Content lives in content.js, labels in i18n.js.
  */
 (function () {
   'use strict';
@@ -14,6 +15,7 @@
   var state = {
     lang: 'en',
     theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
+    filter: 'all',
   };
 
   var tabList = document.querySelector('[role="tablist"]');
@@ -52,6 +54,10 @@
     return '<svg class="icon" aria-hidden="true"><use href="#i-' + name + '"/></svg>';
   }
 
+  function findTour(id) {
+    return SITE.tours.filter(function (item) { return item.id === id; })[0];
+  }
+
   function askHref(subjectKey, topic) {
     var subject = t(subjectKey, { topic: topic });
     var body = t('mail.body', { topic: topic });
@@ -60,7 +66,7 @@
       '&body=' + encodeURIComponent(body);
   }
 
-  // Full sentence for the experience dialog, e.g. "From $95 USD per person".
+  // Full sentence for the experience window, e.g. "From $95 USD per person".
   function priceText(tour) {
     return tour.price ? t('price.from', { price: tour.price }) : t('price.onRequest');
   }
@@ -82,10 +88,24 @@
     }).join('') + '</ul>';
   }
 
+  function visibleTours() {
+    return SITE.tours.filter(function (tour) {
+      return state.filter === 'all' || tour.categories.indexOf(state.filter) !== -1;
+    });
+  }
+
   /* ---------- rendering ---------- */
 
+  function renderFilters() {
+    document.getElementById('filters').innerHTML = ['all'].concat(SITE.filters).map(function (name) {
+      var label = name === 'all' ? t('filters.all') : t('cat.' + name);
+      var pressed = state.filter === name;
+      return '<button type="button" class="filter-btn" data-filter="' + esc(name) + '" aria-pressed="' + pressed + '">' + esc(label) + '</button>';
+    }).join('');
+  }
+
   function renderTours() {
-    document.getElementById('tour-grid').innerHTML = SITE.tours.map(function (tour) {
+    document.getElementById('tour-grid').innerHTML = visibleTours().map(function (tour) {
       var copy = tour[state.lang];
       return '' +
         '<article class="tour-card">' +
@@ -103,6 +123,16 @@
           '</div>' +
         '</article>';
     }).join('');
+  }
+
+  // The two cards in the hero show the tour's own title and category.
+  function renderHeroCards() {
+    document.querySelectorAll('[data-hero-title]').forEach(function (el) {
+      el.textContent = findTour(el.getAttribute('data-hero-title'))[state.lang].title;
+    });
+    document.querySelectorAll('[data-hero-kicker]').forEach(function (el) {
+      el.textContent = findTour(el.getAttribute('data-hero-kicker'))[state.lang].category;
+    });
   }
 
   function renderServices() {
@@ -204,7 +234,9 @@
     if (save) write(LANG_KEY, lang);
 
     translateStatic();
+    renderFilters();
     renderTours();
+    renderHeroCards();
     renderServices();
     renderTips();
     renderContact();
@@ -277,10 +309,33 @@
     document.querySelector('.tabs-bar').scrollIntoView({ block: 'start' });
   });
 
-  /* ---------- experience dialog ---------- */
+  /* ---------- category filters ---------- */
+
+  function setFilter(name) {
+    if (name !== 'all' && SITE.filters.indexOf(name) === -1) return;
+    state.filter = name;
+    renderFilters();
+    renderTours();
+  }
+
+  document.getElementById('filters').addEventListener('click', function (event) {
+    var button = event.target.closest('[data-filter]');
+    if (button) setFilter(button.getAttribute('data-filter'));
+  });
+
+  // Category chips in the hero filter the tours and bring the tours tab into view.
+  document.querySelector('.cat-chips').addEventListener('click', function (event) {
+    var chip = event.target.closest('[data-filter]');
+    if (!chip) return;
+    setFilter(chip.getAttribute('data-filter'));
+    setTab('tours');
+    document.querySelector('.tabs-bar').scrollIntoView({ block: 'start' });
+  });
+
+  /* ---------- experience window ---------- */
 
   function openTour(id) {
-    var tour = SITE.tours.filter(function (item) { return item.id === id; })[0];
+    var tour = findTour(id);
     if (!tour) return;
     var copy = tour[state.lang];
 
@@ -288,9 +343,34 @@
     image.setAttribute('src', tour.image);
     image.style.objectPosition = tour.focus;
 
+    document.getElementById('dialog-price-tag').textContent = priceTag(tour);
+    document.getElementById('dialog-kicker').textContent = copy.category;
     document.getElementById('dialog-title').textContent = copy.title;
-    dialog.querySelector('.dialog-price').textContent = priceText(tour);
-    dialog.querySelector('.dialog-description').textContent = copy.description;
+    document.getElementById('dialog-tags').innerHTML = tour.categories.map(function (cat) {
+      return '<span>' + esc(t('cat.' + cat)) + '</span>';
+    }).join('');
+    document.getElementById('dialog-description').textContent = copy.description;
+    document.getElementById('dialog-highlights').innerHTML = copy.highlights.map(function (item) {
+      return '<li>' + icon('check') + '<span>' + esc(item) + '</span></li>';
+    }).join('');
+    document.getElementById('dialog-bring').innerHTML = copy.bring.map(function (item) {
+      return '<li>' + esc(item) + '</li>';
+    }).join('');
+    // Duration, inclusions and meeting point appear only once filled in content.js;
+    // until then one row says they are confirmed before booking.
+    var details = [
+      [t('info.duration'), copy.duration],
+      [t('info.included'), copy.included],
+      [t('info.meeting'), copy.meetingPoint],
+    ].filter(function (row) { return row[1]; });
+    var info = [
+      [t('info.price'), priceText(tour)],
+      [t('info.languages'), t('info.guides')],
+      [t('info.payment'), t('info.paymentValue')],
+    ].concat(details.length ? details : [[t('info.details'), t('info.detailsValue')]]);
+    document.getElementById('dialog-info').innerHTML = info.map(function (row) {
+      return '<div><dt>' + esc(row[0]) + '</dt><dd>' + esc(row[1]) + '</dd></div>';
+    }).join('');
 
     var ask = document.getElementById('dialog-ask');
     ask.setAttribute('href', askHref('mail.tourSubject', copy.title));
@@ -298,9 +378,11 @@
 
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
+    dialog.scrollTop = 0;
   }
 
-  document.getElementById('tour-grid').addEventListener('click', function (event) {
+  // "View Experience" buttons on the cards and the photo cards in the hero both open the window.
+  document.addEventListener('click', function (event) {
     var button = event.target.closest('[data-tour]');
     if (button) openTour(button.getAttribute('data-tour'));
   });

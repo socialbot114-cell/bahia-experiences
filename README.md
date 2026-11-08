@@ -21,6 +21,8 @@ assets/      Favicon e fotos otimizadas (WebP)
 - **E-mail de contato:** `contactEmail` em `content.js`.
 - **Textos:** cada item tem `en` e `es`. Ao mudar um, mude o outro.
 - **Categoria do passeio:** o campo `category` em `content.js` (aparece acima do título do card).
+- **Categorias e filtros:** `categories` de cada passeio e a lista `filters` em `content.js`. Os nomes das categorias ficam em `i18n.js` (chaves `cat.*`).
+- **Janela do passeio:** `highlights` e `bring` (listas em EN e ES). Preencha `duration`, `included` e `meetingPoint` quando confirmar; enquanto estiverem vazios, a janela mostra que esses detalhes são confirmados antes de reservar.
 - **Passos e perguntas frequentes:** as chaves `steps.*` e `faq.*` em `i18n.js`.
 - **Fotos:** coloque em `assets/photos/` (WebP, cerca de 1100 px no maior lado) e aponte o campo `image` do passeio.
 - **Idioma:** o site abre em inglês, ou em espanhol se o navegador estiver em espanhol. A escolha fica salva. Também funciona com `?lang=es` na URL.

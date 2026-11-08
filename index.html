@@ -92,18 +92,47 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">Porto Seguro · Arraial d’Ajuda · Trancoso</p>
-          <h1 data-i18n="hero.title">Explore Bahia’s coast with local experts.</h1>
+          <h1>
+            <span data-i18n="hero.title">Explore Bahia’s coast</span>
+            <em data-i18n="hero.titleAccent">with local experts.</em>
+          </h1>
           <p class="lead" data-i18n="hero.subtitle">Tours, bilingual guides, city tips, private transfers and concierge help for English and Spanish speakers.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#tours" data-i18n="btn.view">View Experience</a>
             <a class="btn btn-outline" href="#contact" data-i18n="btn.ask">Ask a Question</a>
           </div>
+          <div class="hero-categories">
+            <p class="hero-categories-label" data-i18n="hero.categories">Find by type</p>
+            <div class="cat-chips" role="group" aria-label="Find by type" data-i18n-aria="hero.categories">
+              <button type="button" class="cat-chip" data-filter="adventure" data-i18n="cat.adventure">Adventure</button>
+              <button type="button" class="cat-chip" data-filter="water" data-i18n="cat.water">Water</button>
+              <button type="button" class="cat-chip" data-filter="culture" data-i18n="cat.culture">Culture</button>
+              <button type="button" class="cat-chip" data-filter="evening" data-i18n="cat.evening">Evening</button>
+              <button type="button" class="cat-chip" data-filter="village" data-i18n="cat.village">Villages</button>
+            </div>
+          </div>
         </div>
-        <figure class="hero-figure">
-          <img src="assets/photos/hero-sun-beach.webp" width="1120" height="1400" fetchpriority="high"
-               alt="A visitor posing by a beach swing on the Bahia coast" data-i18n-alt="hero.imageAlt" />
-          <figcaption data-i18n="hero.location">Local support • Bahia, Brazil</figcaption>
-        </figure>
+        <div class="hero-visual">
+          <figure class="hero-figure">
+            <img src="assets/photos/hero-sun-beach.webp" width="1120" height="1400" fetchpriority="high"
+                 alt="A visitor posing by a beach swing on the Bahia coast" data-i18n-alt="hero.imageAlt" />
+            <figcaption data-i18n="hero.location">Local support • Bahia, Brazil</figcaption>
+          </figure>
+          <button type="button" class="hero-card hero-card--a" data-tour="sunset-luau">
+            <img src="assets/photos/tour-sunset-luau.webp" alt="" />
+            <span class="hero-card-text">
+              <span class="hero-card-kicker" data-hero-kicker="sunset-luau"></span>
+              <span class="hero-card-title" data-hero-title="sunset-luau"></span>
+            </span>
+          </button>
+          <button type="button" class="hero-card hero-card--b" data-tour="jet-ski-coroa-vermelha">
+            <img src="assets/photos/tour-jet-ski.webp" alt="" />
+            <span class="hero-card-text">
+              <span class="hero-card-kicker" data-hero-kicker="jet-ski-coroa-vermelha"></span>
+              <span class="hero-card-title" data-hero-title="jet-ski-coroa-vermelha"></span>
+            </span>
+          </button>
+        </div>
       </div>
       <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <path d="M0 64C240 120 480 0 720 48s480 96 720 24V120H0z" />
@@ -160,6 +189,7 @@
           <h2 data-i18n="tours.title">Experiences along Bahia’s coast</h2>
           <p class="section-intro" data-i18n="tours.intro">Pick an experience and ask us about dates and details.</p>
         </header>
+        <div class="filters" id="filters" role="group" aria-label="Filter experiences" data-i18n-aria="filters.label"></div>
         <div class="tour-grid" id="tour-grid"></div>
         <p class="grid-note" data-i18n="tours.note">Prices are shown in USD per person. Final rates, availability and inclusions are confirmed before booking.</p>
       </div>
@@ -294,12 +324,32 @@
         <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
       </button>
     </form>
-    <img id="dialog-image" alt="" />
+    <div class="dialog-media">
+      <img id="dialog-image" alt="" />
+      <span class="price-tag" id="dialog-price-tag"></span>
+    </div>
     <div class="dialog-body">
+      <p class="tour-kicker" id="dialog-kicker"></p>
       <h2 id="dialog-title"></h2>
-      <p class="dialog-price"></p>
-      <p class="dialog-description"></p>
-      <a class="btn btn-primary" id="dialog-ask" href="#"></a>
+      <div class="dialog-tags" id="dialog-tags"></div>
+      <p class="dialog-description" id="dialog-description"></p>
+      <div class="dialog-cols">
+        <section class="dialog-section">
+          <h3 data-i18n="dialog.highlights">Highlights</h3>
+          <ul class="check-list" id="dialog-highlights"></ul>
+        </section>
+        <section class="dialog-section">
+          <h3 data-i18n="dialog.bring">What to bring</h3>
+          <ul class="dot-list" id="dialog-bring"></ul>
+        </section>
+      </div>
+      <section class="dialog-section dialog-section--info">
+        <h3 data-i18n="dialog.practical">Practical info</h3>
+        <dl class="info-list" id="dialog-info"></dl>
+      </section>
+      <div class="dialog-actions">
+        <a class="btn btn-primary" id="dialog-ask" href="#"></a>
+      </div>
     </div>
   </dialog>
 
