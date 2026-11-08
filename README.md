@@ -11,6 +11,8 @@ index.html   Estrutura da página: hero, abas, contato e rodapé
 styles.css   Cores do tema claro/escuro, layout e responsividade
 content.js   Passeios, galeria, serviços e dicas (EN e ES), preços e e-mail de contato
 blog.js      Artigos do blog (EN e ES) e as categorias do blog
+shop.js      Catálogo de demo: preços, horários, vagas, cupons e extras
+booking.js   Agenda, janela de reserva, carrinho, checkout e minhas reservas (demo)
 i18n.js      Textos da interface: botões, títulos de seção e e-mails
 app.js       Renderização, troca de idioma e tema, abas e janela do passeio
 assets/      Favicon e fotos otimizadas (WebP)
@@ -18,7 +20,8 @@ assets/      Favicon e fotos otimizadas (WebP)
 
 ## Como editar
 
-- **Preços:** em `content.js`, troque `price: null` por um número em USD (por exemplo, `price: 95`). Enquanto estiver `null`, o site mostra "Price on request" (EN) ou "Precio a consultar" (ES).
+- **Preços, horários e vagas:** ficam em `shop.js`. Cada passeio tem `prices` (adulto e criança, em USD; `child: null` para só adultos), `durationMinutes`, `capacity`, `days` (dias da semana, 0 = domingo) e `times` (horários de Bahia). Cupons e extras (`coupons` e `addons`) também ficam lá. Os valores são fictícios, para o modo demo.
+- **Sistema de reservas (demo):** o carrinho, o calendário, a agenda e as reservas funcionam só dentro do navegador (`localStorage`). Nada é cobrado e nenhum e-mail é enviado. A lógica está em `booking.js`. Para reservas de verdade, seria preciso um backend com banco de dados, pagamento e envio de confirmação.
 - **E-mail de contato:** `contactEmail` em `content.js`.
 - **Textos:** cada item tem `en` e `es`. Ao mudar um, mude o outro.
 - **Categoria do passeio:** o campo `category` em `content.js` (aparece acima do título do card).

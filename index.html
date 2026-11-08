@@ -49,6 +49,7 @@
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1.2 12H6.7L5.5 8z" /><path d="M9 8V6.5a3 3 0 0 1 6 0V8" /></symbol>
   </svg>
 
   <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
@@ -61,6 +62,10 @@
     </div>
   </div>
 
+  <div class="demo-banner" role="note">
+    <p data-i18n="demo.banner">Demo: prices, availability and bookings are simulated. No payment is charged.</p>
+  </div>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top">
@@ -69,11 +74,16 @@
       </a>
       <nav class="site-nav" aria-label="Main navigation" data-i18n-aria="nav.label">
         <a href="#tours" data-i18n="nav.tours">Tours</a>
+        <a href="#agenda" data-i18n="nav.agenda">Agenda</a>
         <a href="#blog" data-i18n="nav.blog">Blog</a>
         <a href="#how" data-i18n="nav.how">How it works</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
       <div class="header-actions">
+        <button type="button" class="icon-btn cart-btn" data-cart-open data-i18n-aria="cart.open" aria-label="Open cart">
+          <svg class="icon" aria-hidden="true"><use href="#i-bag" /></svg>
+          <span class="cart-count" id="cart-count" hidden>0</span>
+        </button>
         <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="nav.language">
           <button type="button" data-lang="en" aria-pressed="true">EN</button>
           <button type="button" data-lang="es" aria-pressed="false">ES</button>
@@ -225,6 +235,18 @@
       </div>
     </section>
 
+    <section class="agenda" id="agenda" aria-labelledby="agenda-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="agenda.kicker">Agenda</p>
+          <h2 id="agenda-title" data-i18n="agenda.title">Book a date and time</h2>
+          <p class="section-intro" data-i18n="agenda.intro">Choose a day to see every time that is still open. Seats update as bookings come in.</p>
+        </header>
+        <div class="agenda-days" id="agenda-days" role="group" aria-label="Days" data-i18n-aria="agenda.daysLabel"></div>
+        <div class="agenda-list" id="agenda-list"></div>
+      </div>
+    </section>
+
     <section class="gallery" id="gallery" aria-labelledby="gallery-title">
       <div class="container">
         <header class="section-head">
@@ -326,6 +348,19 @@
         <p class="contact-email"><a id="contact-email" href="#"></a></p>
       </div>
     </section>
+    <section class="checkout" id="checkout" aria-labelledby="checkout-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="checkout.kicker">Checkout</p>
+          <h2 id="checkout-title" data-i18n="checkout.title">Review and confirm your booking</h2>
+          <p class="section-intro" data-i18n="checkout.intro">Demo checkout: nothing is charged and no real booking is made.</p>
+        </header>
+        <div class="checkout-grid">
+          <div class="checkout-main" id="checkout-main"></div>
+          <aside class="checkout-summary" id="checkout-summary" aria-labelledby="checkout-title"></aside>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -356,7 +391,7 @@
     </div>
   </footer>
 
-  <dialog class="experience-dialog" id="experience-dialog" aria-labelledby="dialog-title">
+  <dialog class="experience-dialog has-media" id="experience-dialog" aria-labelledby="dialog-title">
     <form method="dialog">
       <button type="submit" class="dialog-close" data-i18n-aria="btn.close" aria-label="Close">
         <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
@@ -386,14 +421,46 @@
         <dl class="info-list" id="dialog-info"></dl>
       </section>
       <div class="dialog-actions">
-        <a class="btn btn-primary" id="dialog-ask" href="#"></a>
+        <button type="button" class="btn btn-primary" id="dialog-book" data-book="" data-i18n="book.bookThis">Book this experience</button>
+        <a class="btn btn-ghost" id="dialog-ask" href="#"></a>
       </div>
     </div>
   </dialog>
 
+  <dialog class="experience-dialog booking-dialog" id="booking-dialog" aria-labelledby="booking-title">
+    <form method="dialog">
+      <button type="submit" class="dialog-close" data-i18n-aria="btn.close" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+    </form>
+    <div class="booking-body" id="booking-body"></div>
+  </dialog>
+
+  <dialog class="experience-dialog drawer" id="cart-dialog" aria-labelledby="cart-title">
+    <form method="dialog">
+      <button type="submit" class="dialog-close" data-i18n-aria="btn.close" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+    </form>
+    <div class="drawer-body" id="cart-body"></div>
+  </dialog>
+
+  <dialog class="experience-dialog booking-dialog" id="orders-dialog" aria-labelledby="orders-title">
+    <form method="dialog">
+      <button type="submit" class="dialog-close" data-i18n-aria="btn.close" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+    </form>
+    <div class="booking-body" id="orders-body"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
   <script src="content.js"></script>
   <script src="blog.js"></script>
+  <script src="shop.js"></script>
   <script src="i18n.js"></script>
   <script src="app.js"></script>
+  <script src="booking.js"></script>
 </body>
 </html>

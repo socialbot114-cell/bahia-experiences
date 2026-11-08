@@ -3,7 +3,7 @@
  * Interface labels (buttons, headings, category names) live in i18n.js.
  *
  * Tours:
- *  - price: USD per person. Keep null to show "Price on request" until prices are confirmed.
+ *  - Prices, schedules and seats are not here: they come from shop.js.
  *  - focus: CSS object-position for the photo, e.g. "center 40%".
  *  - categories: ids from i18n.js (cat.*). Used by the filters, the hero and the tags.
  *  - highlights and bring: short lists shown in the experience window.
@@ -22,7 +22,6 @@ window.SITE = {
       id: 'pataxo-4x4',
       image: 'assets/photos/tour-4x4.webp',
       focus: 'center 20%',
-      price: null,
       categories: ['adventure', 'nature', 'culture'],
       en: {
         category: 'Adventure · Southern Bahia',
@@ -65,7 +64,6 @@ window.SITE = {
       id: 'jet-ski-coroa-vermelha',
       image: 'assets/photos/tour-jet-ski.webp',
       focus: 'center',
-      price: null,
       categories: ['water', 'scenic'],
       en: {
         category: 'On the water · Coroa Vermelha',
@@ -108,7 +106,6 @@ window.SITE = {
       id: 'sunset-luau',
       image: 'assets/photos/tour-sunset-luau.webp',
       focus: 'center 35%',
-      price: null,
       categories: ['evening', 'music', 'scenic'],
       en: {
         category: 'Evening · Porto Seguro',
@@ -151,7 +148,6 @@ window.SITE = {
       id: 'passarela-do-alcool',
       image: 'assets/photos/tour-passarela.webp',
       focus: 'center 30%',
-      price: null,
       categories: ['evening', 'crafts', 'culture'],
       en: {
         category: 'Evening market · Porto Seguro',
@@ -194,7 +190,6 @@ window.SITE = {
       id: 'arraial-dajuda',
       image: 'assets/photos/tour-arraial.webp',
       focus: 'center 35%',
-      price: null,
       categories: ['daytrip', 'village', 'scenic'],
       en: {
         category: 'Day trip · Arraial d’Ajuda',
@@ -237,7 +232,6 @@ window.SITE = {
       id: 'trancoso',
       image: 'assets/photos/tour-trancoso.webp',
       focus: 'center 30%',
-      price: null,
       categories: ['village', 'history', 'culture'],
       en: {
         category: 'Village · Trancoso',

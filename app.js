@@ -8,6 +8,7 @@
 
   var SITE = window.SITE;
   var BLOG = window.BLOG;
+  var SHOP = window.SHOP;
   var I18N = window.I18N;
   var TABS = ['tours', 'guides', 'tips', 'transfers', 'concierge'];
   var LANG_KEY = 'bahia-lang';
@@ -25,6 +26,7 @@
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   var panels = Array.prototype.slice.call(document.querySelectorAll('[data-panel]'));
   var dialog = document.getElementById('experience-dialog');
+  var langListeners = [];
 
   /* ---------- helpers ---------- */
 
@@ -69,14 +71,20 @@
       '&body=' + encodeURIComponent(body);
   }
 
-  // Full sentence for the experience window, e.g. "From $95 USD per person".
-  function priceText(tour) {
-    return tour.price ? t('price.from', { price: tour.price }) : t('price.onRequest');
+  // Lowest price for one guest, from the demo catalog in shop.js (the children's price if it is lower).
+  function minPrice(tourId) {
+    var p = SHOP.products[tourId].prices;
+    return p.child !== null && p.child < p.adult ? p.child : p.adult;
   }
 
-  // Short badge on the card photo, e.g. "From $95 USD".
+  // Full sentence for the experience window, e.g. "From $35 USD per person".
+  function priceText(tour) {
+    return t('price.from', { price: minPrice(tour.id) });
+  }
+
+  // Short badge on the card photo, e.g. "From $35 USD".
   function priceTag(tour) {
-    return tour.price ? t('price.tag', { price: tour.price }) : t('price.onRequest');
+    return t('price.tag', { price: minPrice(tour.id) });
   }
 
   function chipsHtml(labels) {
@@ -122,6 +130,7 @@
             '<p>' + esc(copy.description) + '</p>' +
             '<div class="tour-foot">' +
               '<button type="button" class="link-btn" data-tour="' + esc(tour.id) + '">' + esc(t('btn.view')) + icon('arrow') + '</button>' +
+              '<button type="button" class="btn btn-primary btn-sm" data-book="' + esc(tour.id) + '">' + esc(t('book.bookNow')) + '</button>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -245,6 +254,7 @@
     renderGallery();
     renderBlog();
     renderContact();
+    langListeners.forEach(function (fn) { fn(lang); });
   }
 
   /* ---------- theme ---------- */
@@ -497,6 +507,7 @@
     ask.setAttribute('href', askHref('mail.tourSubject', copy.title));
     ask.textContent = t('btn.ask');
 
+    document.getElementById('dialog-book').setAttribute('data-book', tour.id);
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
     dialog.scrollTop = 0;
@@ -540,6 +551,17 @@
       applyTheme(event.matches ? 'dark' : 'light');
     });
   }
+
+  // Helpers shared with booking.js, which is loaded after this file.
+  window.Bahia = {
+    t: t,
+    esc: esc,
+    icon: icon,
+    lang: function () { return state.lang; },
+    findTour: findTour,
+    minPrice: minPrice,
+    onLang: function (fn) { langListeners.push(fn); },
+  };
 
   /* ---------- init ---------- */
 
