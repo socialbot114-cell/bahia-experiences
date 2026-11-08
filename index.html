@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bahia Experiences · Tours in Porto Seguro, Brazil</title>
+  <meta name="description" content="Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro and Bahia, Brazil, for English and Spanish speakers." />
+  <meta name="theme-color" content="#08272e" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bahia Experiences · Tours in Porto Seguro, Brazil" />
+  <meta property="og:description" content="Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro and Bahia, Brazil." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    /* Apply the saved or system theme before first paint, so dark mode never flashes. */
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('bahia-theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Icon sprite: 24px stroke icons (inherit color) plus the brand mark. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-brand" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="14" fill="#156566" />
+      <circle cx="24" cy="21" r="8.5" fill="#e1ae5d" />
+      <path d="M8 33q4-4 8 0t8 0 8 0 8 0" fill="none" stroke="#f4f0e8" stroke-width="3" stroke-linecap="round" />
+      <path d="M8 40q4-4 8 0t8 0 8 0 8 0" fill="none" stroke="#f4f0e8" stroke-width="3" stroke-linecap="round" opacity=".55" />
+    </symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" /></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M3.5 16.5v-4l2.2-5h12.6l2.2 5v4z" /><path d="M3.5 12.5h17" /><circle cx="7.5" cy="16.5" r="1.8" /><circle cx="16.5" cy="16.5" r="1.8" /></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.6 1-5.8-4.2-4.1 5.8-.8z" /></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><path d="M2.5 10h19M6.5 15h4" /></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 2" /></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4" /></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 10v10h16V10" /><path d="M3 10l1.8-5h14.4L21 10" /><path d="M3 10a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" /><path d="M10 20v-5h4v5" /></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="16" rx="2.5" /><path d="M3.5 9.5h17M8 2.5v4M16 2.5v4" /></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">
+        <svg class="brand-mark" aria-hidden="true"><use href="#i-brand" /></svg>
+        <span class="brand-name">Bahia Experiences</span>
+      </a>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="nav.language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="es" aria-pressed="false">ES</button>
+        </div>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Switch to dark mode">
+          <svg class="icon theme-icon-moon" aria-hidden="true"><use href="#i-moon" /></svg>
+          <svg class="icon theme-icon-sun" aria-hidden="true"><use href="#i-sun" /></svg>
+        </button>
+        <a class="btn btn-primary btn-sm header-contact" href="#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-deco" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Travel with confidence</p>
+          <h1 data-i18n="hero.title">Explore Bahia’s coast with local experts.</h1>
+          <p class="lead" data-i18n="hero.subtitle">Tours, bilingual guides, city tips, private transfers and concierge help for English and Spanish speakers.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tours" data-i18n="btn.view">View Experience</a>
+            <a class="btn btn-outline" href="#contact" data-i18n="btn.ask">Ask a Question</a>
+          </div>
+          <ul class="chip-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.chip1">English &amp; Portuguese guides</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.chip2">Credit cards &amp; PIX</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.chip3">Prices in USD</span></li>
+          </ul>
+        </div>
+        <figure class="hero-figure">
+          <img src="assets/photos/hero-sun-beach.webp" width="1120" height="1400" fetchpriority="high"
+               alt="A visitor posing by a beach swing on the Bahia coast" data-i18n-alt="hero.imageAlt" />
+          <figcaption data-i18n="hero.location">Local support • Bahia, Brazil</figcaption>
+        </figure>
+      </div>
+      <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M0 64C240 120 480 0 720 48s480 96 720 24V120H0z" />
+      </svg>
+    </section>
+
+    <div class="tabs-bar">
+      <div class="container">
+        <div class="tabs" role="tablist" aria-label="Sections" data-i18n-aria="tabs.label">
+          <button type="button" class="tab" role="tab" id="tab-tours" aria-controls="panel-tours" aria-selected="true" tabindex="0" data-tab="tours">
+            <svg class="icon" aria-hidden="true"><use href="#i-compass" /></svg><span data-i18n="tabs.tours">Tours</span>
+          </button>
+          <button type="button" class="tab" role="tab" id="tab-guides" aria-controls="panel-guides" aria-selected="false" tabindex="-1" data-tab="guides">
+            <svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg><span data-i18n="tabs.guides">Bilingual Guides</span>
+          </button>
+          <button type="button" class="tab" role="tab" id="tab-tips" aria-controls="panel-tips" aria-selected="false" tabindex="-1" data-tab="tips">
+            <svg class="icon" aria-hidden="true"><use href="#i-pin" /></svg><span data-i18n="tabs.tips">City Tips</span>
+          </button>
+          <button type="button" class="tab" role="tab" id="tab-transfers" aria-controls="panel-transfers" aria-selected="false" tabindex="-1" data-tab="transfers">
+            <svg class="icon" aria-hidden="true"><use href="#i-car" /></svg><span data-i18n="tabs.transfers">Transfers</span>
+          </button>
+          <button type="button" class="tab" role="tab" id="tab-concierge" aria-controls="panel-concierge" aria-selected="false" tabindex="-1" data-tab="concierge">
+            <svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><span data-i18n="tabs.concierge">Concierge</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="panel" id="panel-tours" data-panel="tours" role="tabpanel" aria-labelledby="tab-tours" tabindex="0">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="tours.kicker">Tours</p>
+          <h2 data-i18n="tours.title">Experiences along Bahia’s coast</h2>
+          <p class="section-intro" data-i18n="tours.intro">Pick an experience and ask us about dates and details. Prices are in USD per person.</p>
+        </header>
+        <div class="tour-grid" id="tour-grid"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-guides" data-panel="guides" role="tabpanel" aria-labelledby="tab-guides" tabindex="0" hidden>
+      <div class="container">
+        <div class="feature" data-service="guides"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-tips" data-panel="tips" role="tabpanel" aria-labelledby="tab-tips" tabindex="0" hidden>
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="tips.kicker">City tips</p>
+          <h2 data-i18n="tips.title">Practical notes for your stay</h2>
+          <p class="section-intro" data-i18n="tips.intro">A few useful things to know while you explore Porto Seguro.</p>
+        </header>
+        <div class="tips-grid" id="tips-grid"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-transfers" data-panel="transfers" role="tabpanel" aria-labelledby="tab-transfers" tabindex="0" hidden>
+      <div class="container">
+        <div class="split" data-service="transfers"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-concierge" data-panel="concierge" role="tabpanel" aria-labelledby="tab-concierge" tabindex="0" hidden>
+      <div class="container">
+        <div class="feature" data-service="concierge"></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-deco" aria-hidden="true"></div>
+      <div class="container contact-inner">
+        <p class="kicker" data-i18n="contact.kicker">Plan with us</p>
+        <h2 data-i18n="contact.title">Ready to plan your Bahia trip?</h2>
+        <p data-i18n="contact.text">Tell us your dates and interests, and we will help you choose the right experiences.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" id="contact-ask" href="#" data-i18n="btn.ask">Ask a Question</a>
+        </div>
+        <p class="contact-email"><a id="contact-email" href="#"></a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <svg class="brand-mark" aria-hidden="true"><use href="#i-brand" /></svg>
+          <span class="brand-name">Bahia Experiences</span>
+        </a>
+        <p data-i18n="footer.tagline">Travel with confidence in Porto Seguro and Bahia.</p>
+        <p class="footer-muted" data-i18n="hero.location">Local support • Bahia, Brazil</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <p class="footer-title" data-i18n="footer.explore">Explore</p>
+        <a href="#tours" data-i18n="tabs.tours">Tours</a>
+        <a href="#guides" data-i18n="tabs.guides">Bilingual Guides</a>
+        <a href="#tips" data-i18n="tabs.tips">City Tips</a>
+        <a href="#transfers" data-i18n="tabs.transfers">Transfers</a>
+        <a href="#concierge" data-i18n="tabs.concierge">Concierge</a>
+      </nav>
+    </div>
+    <div class="container copyright">
+      <p>© <span id="year">2026</span> Bahia Experiences. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <dialog class="experience-dialog" id="experience-dialog" aria-labelledby="dialog-title">
+    <form method="dialog">
+      <button type="submit" class="dialog-close" data-i18n-aria="btn.close" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+    </form>
+    <img id="dialog-image" alt="" />
+    <div class="dialog-body">
+      <h2 id="dialog-title"></h2>
+      <p class="dialog-price"></p>
+      <p class="dialog-description"></p>
+      <a class="btn btn-primary" id="dialog-ask" href="#"></a>
+    </div>
+  </dialog>
+
+  <script src="content.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
