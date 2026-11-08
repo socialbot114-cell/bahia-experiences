@@ -15,14 +15,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
   <link rel="stylesheet" href="styles.css" />
   <script>
-    /* Apply the saved or system theme before first paint, so dark mode never flashes. */
+    /* Apply the theme before first paint: light by default, or the visitor's saved choice. */
     (function () {
       var theme = null;
       try { theme = localStorage.getItem('bahia-theme'); } catch (e) {}
-      if (theme !== 'light' && theme !== 'dark') {
-        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
     })();
   </script>
 </head>
@@ -50,6 +47,9 @@
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1.2 12H6.7L5.5 8z" /><path d="M9 8V6.5a3 3 0 0 1 6 0V8" /></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></symbol>
+    <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3.5h12V9" /><rect x="3.5" y="9" width="17" height="8" rx="2" /><path d="M7 14h10v6.5H7z" /></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></symbol>
   </svg>
 
   <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
@@ -235,6 +235,41 @@
       </div>
     </section>
 
+    <section class="glance" id="glance" aria-labelledby="glance-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="glance.kicker">Good to know</p>
+          <h2 id="glance-title" data-i18n="glance.title">Bahia at a glance</h2>
+        </header>
+        <div class="glance-grid">
+          <article class="glance-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>
+            <p class="glance-label" data-i18n="glance.time">Local time</p>
+            <p class="glance-value" id="bahia-clock">—</p>
+            <p class="glance-note" data-i18n="glance.timeNote">Brasília time (UTC−3)</p>
+          </article>
+          <article class="glance-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-card" /></svg>
+            <p class="glance-label" data-i18n="glance.currency">Currency</p>
+            <p class="glance-value" data-i18n="glance.currencyValue">Brazilian real (BRL)</p>
+            <p class="glance-note" data-i18n="glance.currencyNote">Prices on this site are in USD.</p>
+          </article>
+          <article class="glance-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg>
+            <p class="glance-label" data-i18n="glance.languages">Languages</p>
+            <p class="glance-value" data-i18n="glance.languagesValue">Portuguese</p>
+            <p class="glance-note" data-i18n="glance.languagesNote">Our guides speak English and Portuguese.</p>
+          </article>
+          <article class="glance-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-pin" /></svg>
+            <p class="glance-label" data-i18n="glance.payments">Payments</p>
+            <p class="glance-value" data-i18n="glance.paymentsValue">Cards and PIX</p>
+            <p class="glance-note" data-i18n="glance.paymentsNote">Credit cards and PIX are accepted in Brazil.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="agenda" id="agenda" aria-labelledby="agenda-title">
       <div class="container">
         <header class="section-head">
@@ -244,6 +279,22 @@
         </header>
         <div class="agenda-days" id="agenda-days" role="group" aria-label="Days" data-i18n-aria="agenda.daysLabel"></div>
         <div class="agenda-list" id="agenda-list"></div>
+      </div>
+    </section>
+
+    <section class="saved" id="saved" aria-labelledby="saved-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="saved.kicker">Saved</p>
+          <h2 id="saved-title" data-i18n="saved.title">Your shortlist</h2>
+          <p class="section-intro" data-i18n="saved.intro">Experiences you saved on this device. Print the list or book each one.</p>
+        </header>
+        <div class="saved-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="saved-print"><svg class="icon" aria-hidden="true"><use href="#i-print" /></svg><span data-i18n="saved.print">Print list</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="saved-clear" data-i18n="saved.clear">Clear list</button>
+        </div>
+        <div class="saved-list" id="saved-list"></div>
+        <p class="empty" id="saved-empty" data-i18n="saved.empty">Tap the heart on any experience to save it here.</p>
       </div>
     </section>
 
@@ -278,8 +329,26 @@
           <div class="post-cta">
             <p data-i18n="blog.askTitle">Have a question about this topic?</p>
             <a class="btn btn-primary" id="post-ask" href="#" data-i18n="btn.ask">Ask a Question</a>
+            <button type="button" class="btn btn-outline" id="post-share" data-i18n="share.copy">Copy link</button>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="checklist" id="checklist" aria-labelledby="checklist-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="checklist.kicker">Checklist</p>
+          <h2 id="checklist-title" data-i18n="checklist.title">Your Bahia checklist</h2>
+          <p class="section-intro" data-i18n="checklist.intro">Tick what you have packed. Your list is saved on this device.</p>
+        </header>
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="check-progress" data-i18n-aria="checklist.progressLabel"><span id="check-fill"></span></div>
+        <p class="progress-text" id="check-text"></p>
+        <div class="check-grid" id="check-grid"></div>
+        <div class="saved-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="check-print"><svg class="icon" aria-hidden="true"><use href="#i-print" /></svg><span data-i18n="checklist.print">Print list</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="check-reset" data-i18n="checklist.reset">Reset</button>
+        </div>
       </div>
     </section>
 
@@ -423,6 +492,8 @@
       <div class="dialog-actions">
         <button type="button" class="btn btn-primary" id="dialog-book" data-book="" data-i18n="book.bookThis">Book this experience</button>
         <a class="btn btn-ghost" id="dialog-ask" href="#"></a>
+        <button type="button" class="btn btn-ghost" id="dialog-fav" data-fav="" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-heart" /></svg><span data-i18n="fav.save">Save</span></button>
+        <button type="button" class="btn btn-ghost" id="dialog-share" data-i18n="share.copy">Copy link</button>
       </div>
     </div>
   </dialog>
@@ -453,6 +524,17 @@
     </form>
     <div class="booking-body" id="orders-body"></div>
   </dialog>
+
+  <nav class="mobile-nav" aria-label="Quick navigation" data-i18n-aria="nav.quick">
+    <a href="#tours"><svg class="icon" aria-hidden="true"><use href="#i-compass" /></svg><span data-i18n="tabs.tours">Tours</span></a>
+    <a href="#agenda"><svg class="icon" aria-hidden="true"><use href="#i-calendar" /></svg><span data-i18n="nav.agenda">Agenda</span></a>
+    <button type="button" data-cart-open><svg class="icon" aria-hidden="true"><use href="#i-bag" /></svg><span data-i18n="nav.cart">Cart</span><span class="cart-count" id="cart-count-mobile" hidden>0</span></button>
+    <a href="#saved"><svg class="icon" aria-hidden="true"><use href="#i-heart" /></svg><span data-i18n="nav.saved">Saved</span></a>
+  </nav>
+
+  <button type="button" class="to-top" id="to-top" data-i18n-aria="top.backToTop" aria-label="Back to top" hidden>
+    <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+  </button>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 

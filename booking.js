@@ -267,9 +267,11 @@
   }
 
   function updateCartCount() {
-    var el = document.getElementById('cart-count');
-    el.textContent = String(state.cart.length);
-    el.hidden = state.cart.length === 0;
+    ['cart-count', 'cart-count-mobile'].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.textContent = String(state.cart.length);
+      el.hidden = state.cart.length === 0;
+    });
   }
 
   /* ---------- booking window ---------- */
@@ -997,6 +999,7 @@
 
   /* ---------- init ---------- */
 
+  H.toast = toast;
   updateCartCount();
   renderAgenda();
   route();

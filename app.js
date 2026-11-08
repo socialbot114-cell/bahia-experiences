@@ -13,6 +13,9 @@
   var TABS = ['tours', 'guides', 'tips', 'transfers', 'concierge'];
   var LANG_KEY = 'bahia-lang';
   var THEME_KEY = 'bahia-theme';
+  var SAVED_KEY = 'bahia-saved';
+  var CHECK_KEY = 'bahia-checklist';
+  var CHECK_ITEMS = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7', 'item8'];
 
   var state = {
     lang: 'en',
@@ -20,6 +23,9 @@
     filter: 'all',
     blogFilter: 'all',
     post: null,
+    saved: readJSON(SAVED_KEY, []),
+    checks: readJSON(CHECK_KEY, {}),
+    currentTourId: '',
   };
 
   var tabList = document.querySelector('[role="tablist"]');
@@ -122,6 +128,8 @@
         '<article class="tour-card">' +
           '<div class="tour-media">' +
             '<img src="' + esc(tour.image) + '" alt="" loading="lazy" decoding="async" style="object-position:' + esc(tour.focus) + '" />' +
+            '<button type="button" class="fav-btn" data-fav="' + esc(tour.id) + '" aria-pressed="' + isSaved(tour.id) + '" aria-label="' +
+              esc(t(isSaved(tour.id) ? 'fav.remove' : 'fav.add')) + '"><svg class="icon" aria-hidden="true"><use href="#i-heart" /></svg></button>' +
             '<span class="price-tag">' + esc(priceTag(tour)) + '</span>' +
           '</div>' +
           '<div class="tour-body">' +
@@ -254,6 +262,10 @@
     renderGallery();
     renderBlog();
     renderContact();
+    renderSaved();
+    renderChecklist();
+    renderClock();
+    syncDialogFav();
     langListeners.forEach(function (fn) { fn(lang); });
   }
 
@@ -447,6 +459,12 @@
   function routeHash(scroll) {
     var raw = window.location.hash.slice(1);
 
+    // #tour/<id> is a shareable link that opens one experience window.
+    if (raw.indexOf('tour/') === 0) {
+      if (findTour(raw.slice(5))) openTour(raw.slice(5));
+      return;
+    }
+
     if (raw === 'blog' || raw.indexOf('blog/') === 0) {
       state.post = raw.indexOf('blog/') === 0 ? decodeURIComponent(raw.slice(5)) : null;
       if (state.post && !findPost(state.post)) state.post = null;
@@ -508,6 +526,8 @@
     ask.textContent = t('btn.ask');
 
     document.getElementById('dialog-book').setAttribute('data-book', tour.id);
+    state.currentTourId = tour.id;
+    syncDialogFav();
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
     dialog.scrollTop = 0;
@@ -544,13 +564,161 @@
     write(THEME_KEY, next);
   });
 
-  // Follow the system theme until the visitor picks one.
-  var systemTheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-  if (systemTheme && read(THEME_KEY) === null) {
-    systemTheme.addEventListener('change', function (event) {
-      applyTheme(event.matches ? 'dark' : 'light');
+  // The site opens in light mode, whatever the system setting; only the visitor's own choice changes it.
+
+  /* ---------- saved experiences, checklist, clock, share, back to top ---------- */
+
+  function readJSON(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function writeJSON(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* storage blocked: keep working for this visit */ }
+  }
+
+  function notify(message) {
+    if (window.Bahia && window.Bahia.toast) window.Bahia.toast(message);
+  }
+
+  function isSaved(id) {
+    return state.saved.indexOf(id) !== -1;
+  }
+
+  function toggleSaved(id) {
+    state.saved = isSaved(id)
+      ? state.saved.filter(function (item) { return item !== id; })
+      : state.saved.concat([id]);
+    writeJSON(SAVED_KEY, state.saved);
+    renderTours();
+    renderSaved();
+    syncDialogFav();
+  }
+
+  function syncDialogFav() {
+    var fav = document.getElementById('dialog-fav');
+    if (!fav) return;
+    var id = state.currentTourId;
+    var saved = !!id && isSaved(id);
+    fav.setAttribute('data-fav', id);
+    fav.setAttribute('aria-pressed', String(saved));
+    fav.querySelector('span').textContent = t(saved ? 'fav.saved' : 'fav.save');
+  }
+
+  function renderSaved() {
+    var tours = state.saved.map(findTour).filter(Boolean);
+    document.getElementById('saved-list').innerHTML = tours.map(function (tour) {
+      var copy = tour[state.lang];
+      return '' +
+        '<article class="saved-card">' +
+          '<img src="' + esc(tour.image) + '" alt="" loading="lazy" decoding="async" style="object-position:' + esc(tour.focus) + '" />' +
+          '<div class="saved-card-body">' +
+            '<p class="saved-card-kicker">' + esc(copy.category) + '</p>' +
+            '<h3>' + esc(copy.title) + '</h3>' +
+            '<p>' + esc(priceTag(tour)) + '</p>' +
+            '<div class="saved-card-actions">' +
+              '<button type="button" class="btn btn-primary btn-sm" data-book="' + esc(tour.id) + '">' + esc(t('book.bookNow')) + '</button>' +
+              '<button type="button" class="btn btn-ghost btn-sm" data-fav="' + esc(tour.id) + '" aria-pressed="true">' + esc(t('saved.remove')) + '</button>' +
+            '</div>' +
+          '</div>' +
+        '</article>';
+    }).join('');
+    document.getElementById('saved-empty').hidden = tours.length > 0;
+    document.getElementById('saved-clear').hidden = tours.length === 0;
+    document.getElementById('saved-print').disabled = tours.length === 0;
+  }
+
+  function renderChecklist() {
+    var done = CHECK_ITEMS.filter(function (id) { return !!state.checks[id]; }).length;
+    var percent = Math.round(done / CHECK_ITEMS.length * 100);
+    document.getElementById('check-grid').innerHTML = CHECK_ITEMS.map(function (id) {
+      var checked = !!state.checks[id];
+      return '<label class="check-item' + (checked ? ' is-done' : '') + '">' +
+        '<input type="checkbox" data-check="' + id + '"' + (checked ? ' checked' : '') + ' />' +
+        '<span>' + esc(t('checklist.' + id)) + '</span></label>';
+    }).join('');
+    document.getElementById('check-fill').style.width = percent + '%';
+    document.getElementById('check-progress').setAttribute('aria-valuenow', String(percent));
+    document.getElementById('check-text').textContent = t('checklist.progress', { done: done, total: CHECK_ITEMS.length });
+  }
+
+  function renderClock() {
+    var el = document.getElementById('bahia-clock');
+    if (!el) return;
+    el.textContent = new Intl.DateTimeFormat(state.lang === 'es' ? 'es-US' : 'en-US', {
+      weekday: 'short',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: 'America/Bahia',
+    }).format(new Date());
+  }
+
+  // Copies a link to this part of the site (#tour/<id> or #blog/<slug>).
+  function copyLink(hash) {
+    var link = window.location.href.split('#')[0] + hash;
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      notify(link);
+      return;
+    }
+    navigator.clipboard.writeText(link).then(function () {
+      notify(t('share.copied'));
+    }, function () {
+      notify(link);
     });
   }
+
+  // Print only the shortlist or the checklist: the print styles in styles.css read data-print.
+  function printSection(name) {
+    document.body.setAttribute('data-print', name);
+    window.print();
+    document.body.removeAttribute('data-print');
+  }
+
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    var fav = target.closest('[data-fav]');
+    if (fav && fav.getAttribute('data-fav')) {
+      toggleSaved(fav.getAttribute('data-fav'));
+    } else if (target.closest('#saved-print')) {
+      printSection('saved');
+    } else if (target.closest('#saved-clear')) {
+      state.saved = [];
+      writeJSON(SAVED_KEY, state.saved);
+      renderTours();
+      renderSaved();
+      syncDialogFav();
+    } else if (target.closest('#check-print')) {
+      printSection('checklist');
+    } else if (target.closest('#check-reset')) {
+      state.checks = {};
+      writeJSON(CHECK_KEY, state.checks);
+      renderChecklist();
+    } else if (target.closest('#dialog-share') && state.currentTourId) {
+      copyLink('#tour/' + state.currentTourId);
+    } else if (target.closest('#post-share') && state.post) {
+      copyLink('#blog/' + state.post);
+    }
+  });
+
+  document.getElementById('check-grid').addEventListener('change', function (event) {
+    var box = event.target.closest('[data-check]');
+    if (!box) return;
+    state.checks[box.getAttribute('data-check')] = box.checked;
+    writeJSON(CHECK_KEY, state.checks);
+    renderChecklist();
+  });
+
+  var toTop = document.getElementById('to-top');
+  window.addEventListener('scroll', function () {
+    toTop.hidden = window.scrollY < 600;
+  }, { passive: true });
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   // Helpers shared with booking.js, which is loaded after this file.
   window.Bahia = {
@@ -570,5 +738,9 @@
   setTab('tours', { updateHash: false });
   routeHash(false);
 
+  renderSaved();
+  renderChecklist();
+  renderClock();
+  setInterval(renderClock, 30000);
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
