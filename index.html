@@ -69,6 +69,7 @@
       </a>
       <nav class="site-nav" aria-label="Main navigation" data-i18n-aria="nav.label">
         <a href="#tours" data-i18n="nav.tours">Tours</a>
+        <a href="#blog" data-i18n="nav.blog">Blog</a>
         <a href="#how" data-i18n="nav.how">How it works</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
@@ -224,6 +225,42 @@
       </div>
     </section>
 
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="gallery.kicker">Moments</p>
+          <h2 id="gallery-title" data-i18n="gallery.title">Life along Bahia’s coast</h2>
+        </header>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <section class="blog" id="blog" aria-labelledby="blog-title">
+      <div class="container">
+        <div id="blog-list">
+          <header class="section-head">
+            <p class="kicker" data-i18n="blog.kicker">Blog</p>
+            <h2 id="blog-title" data-i18n="blog.title">Guides and stories from Bahia</h2>
+            <p class="section-intro" data-i18n="blog.intro">Practical articles to help you plan, pay and explore with confidence.</p>
+          </header>
+          <div class="filters" id="blog-filters" role="group" aria-label="Filter articles" data-i18n-aria="blog.filtersLabel"></div>
+          <div class="post-grid" id="post-grid"></div>
+        </div>
+        <article class="post" id="blog-post" hidden>
+          <a class="post-back" href="#blog" data-i18n="blog.back">← All articles</a>
+          <p class="tour-kicker" id="post-kicker"></p>
+          <h2 id="post-title"></h2>
+          <p class="post-meta" id="post-meta"></p>
+          <figure class="post-cover"><img id="post-cover" alt="" /></figure>
+          <div class="post-body" id="post-body"></div>
+          <div class="post-cta">
+            <p data-i18n="blog.askTitle">Have a question about this topic?</p>
+            <a class="btn btn-primary" id="post-ask" href="#" data-i18n="btn.ask">Ask a Question</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="steps" id="how" aria-labelledby="how-title">
       <div class="container">
         <header class="section-head">
@@ -308,6 +345,7 @@
         <a href="#tips" data-i18n="tabs.tips">City Tips</a>
         <a href="#transfers" data-i18n="tabs.transfers">Transfers</a>
         <a href="#concierge" data-i18n="tabs.concierge">Concierge</a>
+        <a href="#blog" data-i18n="nav.blog">Blog</a>
         <a href="#how" data-i18n="nav.how">How it works</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
@@ -354,6 +392,7 @@
   </dialog>
 
   <script src="content.js"></script>
+  <script src="blog.js"></script>
   <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>

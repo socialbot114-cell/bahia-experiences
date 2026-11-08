@@ -7,6 +7,7 @@
   'use strict';
 
   var SITE = window.SITE;
+  var BLOG = window.BLOG;
   var I18N = window.I18N;
   var TABS = ['tours', 'guides', 'tips', 'transfers', 'concierge'];
   var LANG_KEY = 'bahia-lang';
@@ -16,6 +17,8 @@
     lang: 'en',
     theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
     filter: 'all',
+    blogFilter: 'all',
+    post: null,
   };
 
   var tabList = document.querySelector('[role="tablist"]');
@@ -239,6 +242,8 @@
     renderHeroCards();
     renderServices();
     renderTips();
+    renderGallery();
+    renderBlog();
     renderContact();
   }
 
@@ -300,14 +305,7 @@
     setTab(tabButtons[next].getAttribute('data-tab'), { focus: true });
   });
 
-  // Links such as "#tours" in the hero or footer open the matching tab.
-  // Other anchors (#how, #faq, #contact) are plain page sections and scroll normally.
-  window.addEventListener('hashchange', function () {
-    var name = window.location.hash.slice(1);
-    if (TABS.indexOf(name) === -1) return;
-    setTab(name, { updateHash: false });
-    document.querySelector('.tabs-bar').scrollIntoView({ block: 'start' });
-  });
+  // Hash links (#tours, #blog/slug, ...) are handled by routeHash, defined with the blog below.
 
   /* ---------- category filters ---------- */
 
@@ -331,6 +329,129 @@
     setTab('tours');
     document.querySelector('.tabs-bar').scrollIntoView({ block: 'start' });
   });
+
+  /* ---------- gallery ---------- */
+
+  function renderGallery() {
+    document.getElementById('gallery-grid').innerHTML = SITE.gallery.map(function (item) {
+      var caption = item[state.lang].caption;
+      return '' +
+        '<figure class="gallery-item">' +
+          '<img src="' + esc(item.image) + '" alt="' + esc(caption) + '" loading="lazy" decoding="async" />' +
+          '<figcaption>' + esc(caption) + '</figcaption>' +
+        '</figure>';
+    }).join('');
+  }
+
+  /* ---------- blog ---------- */
+
+  function findPost(slug) {
+    return BLOG.posts.filter(function (post) { return post.slug === slug; })[0];
+  }
+
+  // Estimated from the words in the article: about 200 words per minute.
+  function readingTime(post) {
+    var copy = post[state.lang];
+    var text = [copy.title].concat(copy.body.map(function (block) {
+      return block.type === 'ul' ? block.items.join(' ') : block.text;
+    })).join(' ');
+    var words = text.split(/\s+/).filter(Boolean).length;
+    return t('blog.readingTime', { min: Math.max(2, Math.round(words / 200)) });
+  }
+
+  function renderBlogFilters() {
+    document.getElementById('blog-filters').innerHTML = ['all'].concat(BLOG.categories).map(function (name) {
+      var label = name === 'all' ? t('filters.all') : t('blog.cat.' + name);
+      var pressed = state.blogFilter === name;
+      return '<button type="button" class="filter-btn" data-blog-filter="' + esc(name) + '" aria-pressed="' + pressed + '">' + esc(label) + '</button>';
+    }).join('');
+  }
+
+  function renderBlogGrid() {
+    var posts = BLOG.posts.filter(function (post) {
+      return state.blogFilter === 'all' || post.category === state.blogFilter;
+    });
+    document.getElementById('post-grid').innerHTML = posts.map(function (post) {
+      var copy = post[state.lang];
+      return '' +
+        '<article class="post-card">' +
+          '<a class="post-card-link" href="#blog/' + esc(post.slug) + '">' +
+            '<div class="post-card-media"><img src="' + esc(post.image) + '" alt="" loading="lazy" decoding="async" /></div>' +
+            '<div class="post-card-body">' +
+              '<p class="tour-kicker">' + esc(t('blog.cat.' + post.category)) + ' · ' + esc(readingTime(post)) + '</p>' +
+              '<h3>' + esc(copy.title) + '</h3>' +
+              '<p>' + esc(copy.excerpt) + '</p>' +
+              '<span class="link-text">' + esc(t('blog.readMore')) + icon('arrow') + '</span>' +
+            '</div>' +
+          '</a>' +
+        '</article>';
+    }).join('');
+  }
+
+  function renderPost(post) {
+    var copy = post[state.lang];
+    document.getElementById('post-kicker').textContent = t('blog.cat.' + post.category);
+    document.getElementById('post-title').textContent = copy.title;
+    document.getElementById('post-meta').textContent = readingTime(post);
+    document.getElementById('post-cover').setAttribute('src', post.image);
+    document.getElementById('post-body').innerHTML = copy.body.map(function (block) {
+      if (block.type === 'h') return '<h3>' + esc(block.text) + '</h3>';
+      if (block.type === 'ul') {
+        return '<ul class="dot-list">' + block.items.map(function (item) {
+          return '<li>' + esc(item) + '</li>';
+        }).join('') + '</ul>';
+      }
+      return '<p>' + esc(block.text) + '</p>';
+    }).join('');
+    var ask = document.getElementById('post-ask');
+    ask.setAttribute('href', askHref('mail.postSubject', copy.title));
+    ask.textContent = t('btn.ask');
+  }
+
+  // The blog shows either the list or one article, depending on state.post.
+  function renderBlog() {
+    renderBlogFilters();
+    renderBlogGrid();
+    var post = state.post && findPost(state.post);
+    document.getElementById('blog-list').hidden = !!post;
+    document.getElementById('blog-post').hidden = !post;
+    if (post) renderPost(post);
+  }
+
+  function setBlogFilter(name) {
+    if (name !== 'all' && BLOG.categories.indexOf(name) === -1) return;
+    state.blogFilter = name;
+    renderBlogFilters();
+    renderBlogGrid();
+  }
+
+  document.getElementById('blog-filters').addEventListener('click', function (event) {
+    var button = event.target.closest('[data-blog-filter]');
+    if (button) setBlogFilter(button.getAttribute('data-blog-filter'));
+  });
+
+  /* ---------- hash routing ---------- */
+
+  // #tours, #guides, ... open a tab; #blog shows the article list; #blog/<slug> opens one article.
+  // Other anchors (#how, #faq, #contact, #gallery) are plain page sections and scroll normally.
+  function routeHash(scroll) {
+    var raw = window.location.hash.slice(1);
+
+    if (raw === 'blog' || raw.indexOf('blog/') === 0) {
+      state.post = raw.indexOf('blog/') === 0 ? decodeURIComponent(raw.slice(5)) : null;
+      if (state.post && !findPost(state.post)) state.post = null;
+      renderBlog();
+      if (scroll) document.getElementById('blog').scrollIntoView({ block: 'start' });
+      return;
+    }
+
+    if (TABS.indexOf(raw) !== -1) {
+      setTab(raw, { updateHash: false });
+      if (scroll) document.querySelector('.tabs-bar').scrollIntoView({ block: 'start' });
+    }
+  }
+
+  window.addEventListener('hashchange', function () { routeHash(true); });
 
   /* ---------- experience window ---------- */
 
@@ -424,9 +545,8 @@
 
   applyTheme(state.theme);
   setLang(detectLang(), false);
-
-  var initialTab = window.location.hash.slice(1);
-  setTab(TABS.indexOf(initialTab) !== -1 ? initialTab : 'tours', { updateHash: false });
+  setTab('tours', { updateHash: false });
+  routeHash(false);
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();

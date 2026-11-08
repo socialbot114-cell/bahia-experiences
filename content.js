@@ -15,7 +15,7 @@ window.SITE = {
   contactEmail: 'socialbot114@gmail.com',
 
   // Categories offered as filters (the "All" filter is added automatically).
-  filters: ['adventure', 'water', 'culture', 'evening', 'village'],
+  filters: ['adventure', 'water', 'culture', 'evening', 'village', 'nature', 'music', 'crafts'],
 
   tours: [
     {
@@ -275,6 +275,40 @@ window.SITE = {
         included: '',
         meetingPoint: '',
       },
+    },
+  ],
+
+  // Photos for the "Life along Bahia's coast" gallery. Each caption sits under its photo.
+  gallery: [
+    {
+      image: 'assets/photos/gallery-cafe.webp',
+      en: { caption: 'Breakfast in Porto Seguro' },
+      es: { caption: 'Desayuno en Porto Seguro' },
+    },
+    {
+      image: 'assets/photos/gallery-casinha.webp',
+      en: { caption: 'A green house and a smile in Trancoso' },
+      es: { caption: 'Una casita verde y una sonrisa en Trancoso' },
+    },
+    {
+      image: 'assets/photos/gallery-mercado.webp',
+      en: { caption: 'Artisan market in Porto Seguro' },
+      es: { caption: 'Mercado artesanal en Porto Seguro' },
+    },
+    {
+      image: 'assets/photos/gallery-sorriso.webp',
+      en: { caption: 'Smiles on the Quadrado in Trancoso' },
+      es: { caption: 'Sonrisas en el Quadrado de Trancoso' },
+    },
+    {
+      image: 'assets/photos/gallery-portal.webp',
+      en: { caption: 'A visitor under a colorful gate' },
+      es: { caption: 'Una visitante bajo una puerta colorida' },
+    },
+    {
+      image: 'assets/photos/gallery-bastidores.webp',
+      en: { caption: 'Behind the scenes of a shoot in Trancoso' },
+      es: { caption: 'Detrás de cámaras en Trancoso' },
     },
   ],
 

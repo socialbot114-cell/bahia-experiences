@@ -101,6 +101,25 @@ window.I18N = {
     'btn.ask': 'Ask a Question',
     'btn.close': 'Close',
 
+    'nav.blog': 'Blog',
+
+    'gallery.kicker': 'Moments',
+    'gallery.title': 'Life along Bahia’s coast',
+
+    'blog.kicker': 'Blog',
+    'blog.title': 'Guides and stories from Bahia',
+    'blog.intro': 'Practical articles to help you plan, pay and explore with confidence.',
+    'blog.filtersLabel': 'Filter articles',
+    'blog.readMore': 'Read article',
+    'blog.back': '← All articles',
+    'blog.readingTime': '{min} min read',
+    'blog.askTitle': 'Have a question about this topic?',
+    'blog.cat.planning': 'Planning',
+    'blog.cat.practical': 'Practical tips',
+    'blog.cat.culture': 'Culture',
+    'blog.cat.destinations': 'Destinations',
+    'mail.postSubject': 'Question about the article: {topic}',
+
     'price.from': 'From ${price} USD per person',
     'price.tag': 'From ${price} USD',
     'price.onRequest': 'Price on request',
@@ -222,6 +241,25 @@ window.I18N = {
     'btn.view': 'Ver experiencia',
     'btn.ask': 'Haz una pregunta',
     'btn.close': 'Cerrar',
+
+    'nav.blog': 'Blog',
+
+    'gallery.kicker': 'Momentos',
+    'gallery.title': 'La vida en la costa de Bahía',
+
+    'blog.kicker': 'Blog',
+    'blog.title': 'Guías e historias de Bahía',
+    'blog.intro': 'Artículos prácticos para planificar, pagar y explorar con confianza.',
+    'blog.filtersLabel': 'Filtrar artículos',
+    'blog.readMore': 'Leer artículo',
+    'blog.back': '← Todos los artículos',
+    'blog.readingTime': '{min} min de lectura',
+    'blog.askTitle': '¿Tienes una pregunta sobre este tema?',
+    'blog.cat.planning': 'Planificación',
+    'blog.cat.practical': 'Consejos prácticos',
+    'blog.cat.culture': 'Cultura',
+    'blog.cat.destinations': 'Destinos',
+    'mail.postSubject': 'Consulta sobre el artículo: {topic}',
 
     'price.from': 'Desde US${price} por persona',
     'price.tag': 'Desde US${price}',
