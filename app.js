@@ -60,8 +60,14 @@
       '&body=' + encodeURIComponent(body);
   }
 
+  // Full sentence for the experience dialog, e.g. "From $95 USD per person".
   function priceText(tour) {
     return tour.price ? t('price.from', { price: tour.price }) : t('price.onRequest');
+  }
+
+  // Short badge on the card photo, e.g. "From $95 USD".
+  function priceTag(tour) {
+    return tour.price ? t('price.tag', { price: tour.price }) : t('price.onRequest');
   }
 
   function chipsHtml(labels) {
@@ -85,16 +91,14 @@
         '<article class="tour-card">' +
           '<div class="tour-media">' +
             '<img src="' + esc(tour.image) + '" alt="" loading="lazy" decoding="async" style="object-position:' + esc(tour.focus) + '" />' +
-            '<h3 class="tour-title">' + esc(copy.title) + '</h3>' +
+            '<span class="price-tag">' + esc(priceTag(tour)) + '</span>' +
           '</div>' +
           '<div class="tour-body">' +
+            '<p class="tour-kicker">' + esc(copy.category) + '</p>' +
+            '<h3>' + esc(copy.title) + '</h3>' +
             '<p>' + esc(copy.description) + '</p>' +
             '<div class="tour-foot">' +
-              '<p class="price">' + esc(priceText(tour)) + '</p>' +
-              '<div class="tour-actions">' +
-                '<button type="button" class="btn btn-ghost btn-sm" data-tour="' + esc(tour.id) + '">' + esc(t('btn.view')) + '</button>' +
-                '<a class="btn btn-primary btn-sm" href="' + esc(askHref('mail.tourSubject', copy.title)) + '">' + esc(t('btn.ask')) + '</a>' +
-              '</div>' +
+              '<button type="button" class="link-btn" data-tour="' + esc(tour.id) + '">' + esc(t('btn.view')) + icon('arrow') + '</button>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -193,7 +197,7 @@
   function setLang(lang, save) {
     if (!I18N[lang]) return;
     state.lang = lang;
-    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en-US' : 'es');
     document.querySelectorAll('.lang-switch button').forEach(function (button) {
       button.setAttribute('aria-pressed', String(button.getAttribute('data-lang') === lang));
     });
@@ -265,6 +269,7 @@
   });
 
   // Links such as "#tours" in the hero or footer open the matching tab.
+  // Other anchors (#how, #faq, #contact) are plain page sections and scroll normally.
   window.addEventListener('hashchange', function () {
     var name = window.location.hash.slice(1);
     if (TABS.indexOf(name) === -1) return;

@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en-US" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bahia Experiences · Tours in Porto Seguro, Brazil</title>
-  <meta name="description" content="Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro and Bahia, Brazil, for English and Spanish speakers." />
+  <title>Bahia Experiences · Tours in Porto Seguro, Arraial d’Ajuda and Trancoso</title>
+  <meta name="description" content="Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro, Arraial d’Ajuda and Trancoso, Bahia, for English and Spanish speakers." />
   <meta name="theme-color" content="#08272e" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Bahia Experiences · Tours in Porto Seguro, Brazil" />
-  <meta property="og:description" content="Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro and Bahia, Brazil." />
+  <meta property="og:title" content="Bahia Experiences · Tours in Porto Seguro, Arraial d’Ajuda and Trancoso" />
+  <meta property="og:description" content="Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro, Arraial d’Ajuda and Trancoso, Bahia." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,9 +48,18 @@
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
   </svg>
 
   <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-tag" data-i18n="top.tag">Local experiences</span>
+      <span data-i18n="top.location">Porto Seguro · Bahia, Brazil</span>
+      <span data-i18n="top.prices">Prices in USD</span>
+    </div>
+  </div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -58,6 +67,11 @@
         <svg class="brand-mark" aria-hidden="true"><use href="#i-brand" /></svg>
         <span class="brand-name">Bahia Experiences</span>
       </a>
+      <nav class="site-nav" aria-label="Main navigation" data-i18n-aria="nav.label">
+        <a href="#tours" data-i18n="nav.tours">Tours</a>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="nav.language">
           <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -77,18 +91,13 @@
       <div class="hero-deco" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Travel with confidence</p>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Porto Seguro · Arraial d’Ajuda · Trancoso</p>
           <h1 data-i18n="hero.title">Explore Bahia’s coast with local experts.</h1>
           <p class="lead" data-i18n="hero.subtitle">Tours, bilingual guides, city tips, private transfers and concierge help for English and Spanish speakers.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#tours" data-i18n="btn.view">View Experience</a>
             <a class="btn btn-outline" href="#contact" data-i18n="btn.ask">Ask a Question</a>
           </div>
-          <ul class="chip-list">
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.chip1">English &amp; Portuguese guides</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.chip2">Credit cards &amp; PIX</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.chip3">Prices in USD</span></li>
-          </ul>
         </div>
         <figure class="hero-figure">
           <img src="assets/photos/hero-sun-beach.webp" width="1120" height="1400" fetchpriority="high"
@@ -99,6 +108,27 @@
       <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <path d="M0 64C240 120 480 0 720 48s480 96 720 24V120H0z" />
       </svg>
+    </section>
+
+    <section class="trust" aria-label="Highlights">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <span class="trust-badge"><svg class="icon" aria-hidden="true"><use href="#i-pin" /></svg></span>
+          <span data-i18n="trust.local">Local guides</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-badge"><svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg></span>
+          <span data-i18n="trust.languages">English &amp; Portuguese</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-badge"><svg class="icon" aria-hidden="true"><use href="#i-card" /></svg></span>
+          <span data-i18n="trust.prices">Prices in USD</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-badge"><svg class="icon" aria-hidden="true"><use href="#i-car" /></svg></span>
+          <span data-i18n="trust.private">Private transfers &amp; concierge</span>
+        </div>
+      </div>
     </section>
 
     <div class="tabs-bar">
@@ -128,9 +158,10 @@
         <header class="section-head">
           <p class="kicker" data-i18n="tours.kicker">Tours</p>
           <h2 data-i18n="tours.title">Experiences along Bahia’s coast</h2>
-          <p class="section-intro" data-i18n="tours.intro">Pick an experience and ask us about dates and details. Prices are in USD per person.</p>
+          <p class="section-intro" data-i18n="tours.intro">Pick an experience and ask us about dates and details.</p>
         </header>
         <div class="tour-grid" id="tour-grid"></div>
+        <p class="grid-note" data-i18n="tours.note">Prices are shown in USD per person. Final rates, availability and inclusions are confirmed before booking.</p>
       </div>
     </section>
 
@@ -160,6 +191,59 @@
     <section class="panel" id="panel-concierge" data-panel="concierge" role="tabpanel" aria-labelledby="tab-concierge" tabindex="0" hidden>
       <div class="container">
         <div class="feature" data-service="concierge"></div>
+      </div>
+    </section>
+
+    <section class="steps" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="steps.kicker">How it works</p>
+          <h2 id="how-title" data-i18n="steps.title">Plan your day in three steps</h2>
+        </header>
+        <ol class="steps-grid">
+          <li class="step">
+            <span class="step-num">01</span>
+            <h3 data-i18n="steps.1.title">Pick a tour or service</h3>
+            <p data-i18n="steps.1.text">Browse tours, transfers and concierge help for Porto Seguro and Bahia.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">02</span>
+            <h3 data-i18n="steps.2.title">Tell us what you need</h3>
+            <p data-i18n="steps.2.text">Share your dates, group size and language needs, and we will suggest the best fit.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">03</span>
+            <h3 data-i18n="steps.3.title">Confirm the details</h3>
+            <p data-i18n="steps.3.text">Final rates in USD, inclusions, availability and pickup points are confirmed before you book.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker" data-i18n="faq.kicker">FAQ</p>
+          <h2 id="faq-title" data-i18n="faq.title">Frequently asked questions</h2>
+        </header>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary data-i18n="faq.q1">How do I pay, and in what currency?</summary>
+            <p data-i18n="faq.a1">Prices are shown in USD per person, and the final rate for each experience is confirmed before booking. In Brazil you can pay by credit card or PIX, and we can help with currency exchange.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q2">Will my guide speak English?</summary>
+            <p data-i18n="faq.a2">Yes. Our local guides can assist in English and Portuguese. Ask us to confirm the language for your date when you book.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q3">Can I book a private transfer?</summary>
+            <p data-i18n="faq.a3">Yes. Private transfers can be arranged between selected stops. Pickup points and availability depend on the experience you choose.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q4">How do Pataxó cultural visits work?</summary>
+            <p data-i18n="faq.a4">A cultural visit can be included when it is arranged with local community hosts. We confirm the visit details with them before you book.</p>
+          </details>
+        </div>
       </div>
     </section>
 
@@ -194,9 +278,12 @@
         <a href="#tips" data-i18n="tabs.tips">City Tips</a>
         <a href="#transfers" data-i18n="tabs.transfers">Transfers</a>
         <a href="#concierge" data-i18n="tabs.concierge">Concierge</a>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
     </div>
     <div class="container copyright">
+      <p class="legal" data-i18n="footer.legal">Prices, availability, inclusions and transfer details are confirmed before booking.</p>
       <p>© <span id="year">2026</span> Bahia Experiences. <span data-i18n="footer.rights">All rights reserved.</span></p>
     </div>
   </footer>

@@ -17,10 +17,12 @@ window.SITE = {
       focus: 'center 40%',
       price: null,
       en: {
+        category: 'Adventure · Southern Bahia',
         title: '4x4 Adventure to Pataxó Paradise',
         description: 'Explore scenic coastal trails and forest landscapes on a 4x4 adventure near Pataxó Paradise. A cultural visit can be included when arranged with local community hosts.',
       },
       es: {
+        category: 'Aventura · Sur de Bahía',
         title: 'Aventura en 4x4 a Pataxó Paradise',
         description: 'Recorre senderos costeros panorámicos y paisajes de bosque en una aventura en 4x4 cerca de Pataxó Paradise. Se puede incluir una visita cultural cuando se organiza con anfitriones de la comunidad local.',
       },
@@ -31,10 +33,12 @@ window.SITE = {
       focus: 'center',
       price: null,
       en: {
+        category: 'On the water · Coroa Vermelha',
         title: 'Jet Ski at Coroa Vermelha',
         description: 'Enjoy the turquoise waters of Coroa Vermelha on a jet ski ride along Bahia’s beautiful coastline.',
       },
       es: {
+        category: 'En el agua · Coroa Vermelha',
         title: 'Jet ski en Coroa Vermelha',
         description: 'Disfruta de las aguas turquesa de Coroa Vermelha en un paseo en jet ski por la hermosa costa de Bahía.',
       },
@@ -45,10 +49,12 @@ window.SITE = {
       focus: 'center 35%',
       price: null,
       en: {
+        category: 'Evening · Porto Seguro',
         title: 'Sunset Luau in Porto Seguro',
         description: 'Take in the sunset by the ocean and enjoy a relaxed evening with local music and the warm atmosphere of Porto Seguro.',
       },
       es: {
+        category: 'Atardecer · Porto Seguro',
         title: 'Luau al atardecer en Porto Seguro',
         description: 'Disfruta de la puesta de sol junto al mar y de una velada relajada con música local y el cálido ambiente de Porto Seguro.',
       },
@@ -59,10 +65,12 @@ window.SITE = {
       focus: 'center 30%',
       price: null,
       en: {
+        category: 'Evening market · Porto Seguro',
         title: 'Passarela do Álcool Evening Walk',
         description: 'Stroll through Porto Seguro’s lively evening market, known locally as Passarela do Álcool, and discover local flavors, crafts, and street life.',
       },
       es: {
+        category: 'Mercado nocturno · Porto Seguro',
         title: 'Paseo nocturno por la Passarela do Álcool',
         description: 'Recorre el animado mercado nocturno de Porto Seguro, conocido localmente como Passarela do Álcool, y descubre sabores locales, artesanías y la vida de la calle.',
       },
@@ -73,10 +81,12 @@ window.SITE = {
       focus: 'center 35%',
       price: null,
       en: {
+        category: 'Day trip · Arraial d’Ajuda',
         title: 'Arraial d’Ajuda Day Trip',
         description: 'Explore Arraial d’Ajuda’s colorful streets, tropical scenery, and laid-back coastal atmosphere with a local guide.',
       },
       es: {
+        category: 'Excursión de un día · Arraial d’Ajuda',
         title: 'Excursión de un día a Arraial d’Ajuda',
         description: 'Explora las calles de colores, los paisajes tropicales y el ambiente costero relajado de Arraial d’Ajuda con un guía local.',
       },
@@ -87,10 +97,12 @@ window.SITE = {
       focus: 'center 30%',
       price: null,
       en: {
+        category: 'Village · Trancoso',
         title: 'Trancoso Village & Quadrado',
         description: 'Discover Trancoso’s famous Quadrado, its colorful houses, and the relaxed charm of this historic seaside village.',
       },
       es: {
+        category: 'Pueblo · Trancoso',
         title: 'Pueblo de Trancoso y el Quadrado',
         description: 'Descubre el famoso Quadrado de Trancoso, sus casas de colores y el encanto tranquilo de este histórico pueblo costero.',
       },

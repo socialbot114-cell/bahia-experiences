@@ -20,6 +20,8 @@ assets/      Favicon e fotos otimizadas (WebP)
 - **Preços:** em `content.js`, troque `price: null` por um número em USD (por exemplo, `price: 95`). Enquanto estiver `null`, o site mostra "Price on request" (EN) ou "Precio a consultar" (ES).
 - **E-mail de contato:** `contactEmail` em `content.js`.
 - **Textos:** cada item tem `en` e `es`. Ao mudar um, mude o outro.
+- **Categoria do passeio:** o campo `category` em `content.js` (aparece acima do título do card).
+- **Passos e perguntas frequentes:** as chaves `steps.*` e `faq.*` em `i18n.js`.
 - **Fotos:** coloque em `assets/photos/` (WebP, cerca de 1100 px no maior lado) e aponte o campo `image` do passeio.
 - **Idioma:** o site abre em inglês, ou em espanhol se o navegador estiver em espanhol. A escolha fica salva. Também funciona com `?lang=es` na URL.
 

@@ -5,19 +5,29 @@
 window.I18N = {
   en: {
     'nav.skip': 'Skip to content',
+    'nav.label': 'Main navigation',
     'nav.language': 'Language',
+    'nav.tours': 'Tours',
+    'nav.how': 'How it works',
+    'nav.faq': 'FAQ',
     'nav.contact': 'Contact',
     'theme.toDark': 'Switch to dark mode',
     'theme.toLight': 'Switch to light mode',
 
-    'hero.eyebrow': 'Travel with confidence',
+    'top.tag': 'Local experiences',
+    'top.location': 'Porto Seguro · Bahia, Brazil',
+    'top.prices': 'Prices in USD',
+
+    'hero.eyebrow': 'Porto Seguro · Arraial d’Ajuda · Trancoso',
     'hero.title': 'Explore Bahia’s coast with local experts.',
     'hero.subtitle': 'Tours, bilingual guides, city tips, private transfers and concierge help for English and Spanish speakers.',
-    'hero.chip1': 'English & Portuguese guides',
-    'hero.chip2': 'Credit cards & PIX',
-    'hero.chip3': 'Prices in USD',
-    'hero.location': 'Local support • Bahia, Brazil',
     'hero.imageAlt': 'A visitor posing by a beach swing on the Bahia coast',
+    'hero.location': 'Local support • Bahia, Brazil',
+
+    'trust.local': 'Local guides',
+    'trust.languages': 'English & Portuguese',
+    'trust.prices': 'Prices in USD',
+    'trust.private': 'Private transfers & concierge',
 
     'tabs.label': 'Sections',
     'tabs.tours': 'Tours',
@@ -28,17 +38,39 @@ window.I18N = {
 
     'tours.kicker': 'Tours',
     'tours.title': 'Experiences along Bahia’s coast',
-    'tours.intro': 'Pick an experience and ask us about dates and details. Prices are in USD per person.',
+    'tours.intro': 'Pick an experience and ask us about dates and details.',
+    'tours.note': 'Prices are shown in USD per person. Final rates, availability and inclusions are confirmed before booking.',
 
     'tips.kicker': 'City tips',
     'tips.title': 'Practical notes for your stay',
     'tips.intro': 'A few useful things to know while you explore Porto Seguro.',
+
+    'steps.kicker': 'How it works',
+    'steps.title': 'Plan your day in three steps',
+    'steps.1.title': 'Pick a tour or service',
+    'steps.1.text': 'Browse tours, transfers and concierge help for Porto Seguro and Bahia.',
+    'steps.2.title': 'Tell us what you need',
+    'steps.2.text': 'Share your dates, group size and language needs, and we will suggest the best fit.',
+    'steps.3.title': 'Confirm the details',
+    'steps.3.text': 'Final rates in USD, inclusions, availability and pickup points are confirmed before you book.',
+
+    'faq.kicker': 'FAQ',
+    'faq.title': 'Frequently asked questions',
+    'faq.q1': 'How do I pay, and in what currency?',
+    'faq.a1': 'Prices are shown in USD per person, and the final rate for each experience is confirmed before booking. In Brazil you can pay by credit card or PIX, and we can help with currency exchange.',
+    'faq.q2': 'Will my guide speak English?',
+    'faq.a2': 'Yes. Our local guides can assist in English and Portuguese. Ask us to confirm the language for your date when you book.',
+    'faq.q3': 'Can I book a private transfer?',
+    'faq.a3': 'Yes. Private transfers can be arranged between selected stops. Pickup points and availability depend on the experience you choose.',
+    'faq.q4': 'How do Pataxó cultural visits work?',
+    'faq.a4': 'A cultural visit can be included when it is arranged with local community hosts. We confirm the visit details with them before you book.',
 
     'btn.view': 'View Experience',
     'btn.ask': 'Ask a Question',
     'btn.close': 'Close',
 
     'price.from': 'From ${price} USD per person',
+    'price.tag': 'From ${price} USD',
     'price.onRequest': 'Price on request',
 
     'mail.tourSubject': 'Question about {topic}',
@@ -54,27 +86,38 @@ window.I18N = {
 
     'footer.tagline': 'Travel with confidence in Porto Seguro and Bahia.',
     'footer.explore': 'Explore',
+    'footer.legal': 'Prices, availability, inclusions and transfer details are confirmed before booking.',
     'footer.rights': 'All rights reserved.',
 
-    'meta.title': 'Bahia Experiences · Tours in Porto Seguro, Brazil',
-    'meta.description': 'Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro and Bahia, Brazil, for English and Spanish speakers.',
+    'meta.title': 'Bahia Experiences · Tours in Porto Seguro, Arraial d’Ajuda and Trancoso',
+    'meta.description': 'Tours, bilingual local guides, city tips, private transfers and concierge in Porto Seguro, Arraial d’Ajuda and Trancoso, Bahia, for English and Spanish speakers.',
   },
 
   es: {
     'nav.skip': 'Ir al contenido',
+    'nav.label': 'Navegación principal',
     'nav.language': 'Idioma',
+    'nav.tours': 'Paseos',
+    'nav.how': 'Cómo funciona',
+    'nav.faq': 'Preguntas',
     'nav.contact': 'Contacto',
     'theme.toDark': 'Cambiar a modo oscuro',
     'theme.toLight': 'Cambiar a modo claro',
 
-    'hero.eyebrow': 'Viaja con confianza',
+    'top.tag': 'Experiencias locales',
+    'top.location': 'Porto Seguro · Bahía, Brasil',
+    'top.prices': 'Precios en USD',
+
+    'hero.eyebrow': 'Porto Seguro · Arraial d’Ajuda · Trancoso',
     'hero.title': 'Explora la costa de Bahía con expertos locales.',
     'hero.subtitle': 'Paseos, guías bilingües, consejos de la ciudad, traslados privados y concierge para angloparlantes e hispanohablantes.',
-    'hero.chip1': 'Guías en inglés y portugués',
-    'hero.chip2': 'Tarjetas de crédito y PIX',
-    'hero.chip3': 'Precios en USD',
-    'hero.location': 'Apoyo local • Bahía, Brasil',
     'hero.imageAlt': 'Una visitante posando junto a un columpio de playa en la costa de Bahía',
+    'hero.location': 'Apoyo local • Bahía, Brasil',
+
+    'trust.local': 'Guías locales',
+    'trust.languages': 'Inglés y portugués',
+    'trust.prices': 'Precios en USD',
+    'trust.private': 'Traslados privados y concierge',
 
     'tabs.label': 'Secciones',
     'tabs.tours': 'Paseos',
@@ -85,17 +128,39 @@ window.I18N = {
 
     'tours.kicker': 'Paseos',
     'tours.title': 'Experiencias en la costa de Bahía',
-    'tours.intro': 'Elige una experiencia y pregúntanos por fechas y detalles. Los precios están en USD por persona.',
+    'tours.intro': 'Elige una experiencia y pregúntanos por fechas y detalles.',
+    'tours.note': 'Los precios se muestran en USD por persona. Las tarifas finales, la disponibilidad y lo incluido se confirman antes de reservar.',
 
     'tips.kicker': 'Consejos de la ciudad',
     'tips.title': 'Notas prácticas para tu estancia',
     'tips.intro': 'Algunas cosas útiles mientras exploras Porto Seguro.',
+
+    'steps.kicker': 'Cómo funciona',
+    'steps.title': 'Planifica tu día en tres pasos',
+    'steps.1.title': 'Elige un paseo o servicio',
+    'steps.1.text': 'Explora paseos, traslados y concierge para Porto Seguro y Bahía.',
+    'steps.2.title': 'Cuéntanos qué necesitas',
+    'steps.2.text': 'Comparte tus fechas, el tamaño del grupo y el idioma que necesitas, y te sugerimos la mejor opción.',
+    'steps.3.title': 'Confirma los detalles',
+    'steps.3.text': 'Las tarifas finales en USD, lo incluido, la disponibilidad y los puntos de recogida se confirman antes de reservar.',
+
+    'faq.kicker': 'Preguntas',
+    'faq.title': 'Preguntas frecuentes',
+    'faq.q1': '¿Cómo puedo pagar y en qué moneda?',
+    'faq.a1': 'Los precios se muestran en USD por persona, y la tarifa final de cada experiencia se confirma antes de reservar. En Brasil puedes pagar con tarjeta de crédito o PIX, y te ayudamos con el cambio de moneda.',
+    'faq.q2': '¿Mi guía hablará inglés?',
+    'faq.a2': 'Sí. Nuestros guías locales pueden atenderte en inglés y portugués. Pídenos que confirmemos el idioma para tu fecha al reservar.',
+    'faq.q3': '¿Puedo reservar un traslado privado?',
+    'faq.a3': 'Sí. Podemos organizar traslados privados entre paradas seleccionadas. Los puntos de recogida y la disponibilidad dependen de la experiencia que elijas.',
+    'faq.q4': '¿Cómo funcionan las visitas culturales pataxó?',
+    'faq.a4': 'Una visita cultural puede incluirse cuando se organiza con anfitriones de la comunidad local. Confirmamos los detalles de la visita con ellos antes de que reserves.',
 
     'btn.view': 'Ver experiencia',
     'btn.ask': 'Haz una pregunta',
     'btn.close': 'Cerrar',
 
     'price.from': 'Desde US${price} por persona',
+    'price.tag': 'Desde US${price}',
     'price.onRequest': 'Precio a consultar',
 
     'mail.tourSubject': 'Consulta sobre {topic}',
@@ -111,9 +176,10 @@ window.I18N = {
 
     'footer.tagline': 'Viaja con confianza en Porto Seguro y Bahía.',
     'footer.explore': 'Explorar',
+    'footer.legal': 'Precios, disponibilidad, lo incluido y los detalles de traslado se confirman antes de reservar.',
     'footer.rights': 'Todos los derechos reservados.',
 
-    'meta.title': 'Bahia Experiences · Paseos en Porto Seguro, Brasil',
-    'meta.description': 'Paseos, guías locales bilingües, consejos, traslados privados y concierge en Porto Seguro y Bahía, Brasil, para angloparlantes e hispanohablantes.',
+    'meta.title': 'Bahia Experiences · Paseos en Porto Seguro, Arraial d’Ajuda y Trancoso',
+    'meta.description': 'Paseos, guías locales bilingües, consejos, traslados privados y concierge en Porto Seguro, Arraial d’Ajuda y Trancoso, Bahía, para angloparlantes e hispanohablantes.',
   },
 };
